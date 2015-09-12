@@ -122,18 +122,6 @@
                        .filter(function(e) { return e.id === countryCode;}).style("fill", "green");
                 });
             };
-            function makeid()
-            {
-                var text = "";
-                var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
-
-                for( var i=0; i < 5; i++ )
-                    text += possible.charAt(Math.floor(Math.random() * possible.length));
-
-                return text;
-            }
-
-            paintCountry("miniMapES", "ES");
         </script>
         <script type="text/jsx">
           // Your code here
@@ -142,9 +130,21 @@
             };
             var ProgressBar = React.createClass({
               render: function() {
+                var barType = "progress-bar progress-bar-danger"; 
+                if(parseInt(this.props.percentaje)>50 ){
+                    barType = "progress-bar  progress-bar-warning"; 
+                }
+                if(parseInt(this.props.percentaje)>70 ){
+                    barType = "progress-bar  progress-bar-info"; 
+                }
+                if(parseInt(this.props.percentaje)>90 ){
+                    barType ="progress-bar  progress-bar-success"; 
+                }
+
+
                 return (
                     <div className='progress'>
-                      <div className='progress-bar'
+                      <div className={barType}
                            role='progressbar'
                            aria-valuenow='70'
                            aria-valuemin='0'
@@ -183,26 +183,43 @@
             var Video = React.createClass({
               render: function() {
                 return (
-                    <video controls class="embed-responsive-item" style={{"background-color": "black !important", "min-width": "100%"}}>
+                    <video class="video embed-responsive-item" style={{"background-color": "black !important", "min-width": "100%"}}>
                         <source  src={this.props.src} type="video/mp4" />
                     </video>
                 );
-              }
+              },
+                componentDidMount : function(){
+                    var vid = document.getElementsByTagName("video");
+                    [].forEach.call(vid, function (item) {
+                        item.addEventListener('mouseover', hoverVideo, false);
+                        item.addEventListener('mouseout', hideVideo, false);
+                    });
+
+                    function hoverVideo(e)
+                    {   
+                        this.play();
+                    }
+                    function hideVideo(e)
+                    {
+                        this.pause();
+                    }
+
+                }
             });
             React.render(
               <CountryStatus code="SE" percentaje="30" mapId="alalala"/>,
               document.getElementById('miniMapDiv')
             );
             React.render(
-              <CountryStatus code="HU" percentaje="30" mapId="alala3"/>,
+              <CountryStatus code="HU" percentaje="60" mapId="alala3"/>,
               document.getElementById('hungary')
             );
             React.render(
-              <CountryStatus code="DE" percentaje="30" mapId="alala3GE"/>,
+              <CountryStatus code="DE" percentaje="80" mapId="alala3GE"/>,
               document.getElementById('germany')
             );
             React.render(
-              <CountryStatus code="ES" percentaje="30" mapId="alalE"/>,
+              <CountryStatus code="ES" percentaje="92" mapId="alalE"/>,
               document.getElementById('spain')
             );
 
@@ -223,11 +240,11 @@
               document.getElementById('video4')
             );
             React.render(
-              <Video src="https://s3-eu-west-1.amazonaws.com/mgl.totem/VIDEO_20150912_173319_1408724567.mp4"/>,
+              <Video src="https://s3-eu-west-1.amazonaws.com/mgl.totem/1.mp4"/>,
               document.getElementById('video5')
             );
             React.render(
-              <Video src="https://s3-eu-west-1.amazonaws.com/mgl.totem/VIDEO_20150912_173319_1408724567.mp4"/>,
+              <Video src="https://s3-eu-west-1.amazonaws.com/mgl.totem/2.mp4"/>,
               document.getElementById('video6')
             );
         </script>

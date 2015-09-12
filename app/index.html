@@ -33,6 +33,10 @@
             </a>
         </div>
         <div class="col-md-3">
+            <h2>Population in need</h2>
+            <h1><span id="refuges"></span></h1>
+            <h3>Last month variation</h3>
+            <h1><span id="variationMonth"></span></h1>
         </div>
         <div class="col-md-3" >
             <div id="miniMapDiv" >
@@ -191,6 +195,8 @@
             var CountryStatus = React.createClass({
                 handleClick: function(){
                     $(".nameSelectedCountry").text(this.props.mapId);
+                    $("#refuges").text(this.props.refuges);
+                    $("#variationMonth").text(this.props.variationMonth);
                     React.unmountComponentAtNode(document.getElementById('miniMapDiv'));
                     for(var i = 0; i < 9; i++){
                         React.unmountComponentAtNode(document.getElementById('video'+i));
@@ -236,53 +242,39 @@
 
                 }
             });
-            /*
-            React.render(
-              <CountryStatus code="SE" percentaje="92" mapId="Sweden" refuges="1346"/>,
-              document.getElementById('sweden')
-            );
-            React.render(
-              <CountryStatus code="ES" percentaje="24" mapId="Spain" refuges="24000"/>,
-              document.getElementById('spain')
-            );
-            React.render(
-              <CountryStatus code="HU" percentaje="60" mapId="Hungary" refuges="54000"/>,
-              document.getElementById('hungary')
-            );
-            React.render(
-              <CountryStatus code="DE" percentaje="80" mapId="Germany"  refuges="14000"/>,
-              document.getElementById('germany')
-            );
-*/
-
 
             var countryData = {
                 Sweden:{
                     percentaje:90, 
                     mapId:"Sweden", 
                     refuges:50000, 
+                    variationMonth:10000,
                     code:"SE", 
                     videos:["http://techslides.com/demos/sample-videos/small.mp4", "https://s3-eu-west-1.amazonaws.com/mgl.totem/VIDEO_20150912_173319_1408724567.mp4", "https://s3-eu-west-1.amazonaws.com/mgl.totem/1.mp4", "https://s3-eu-west-1.amazonaws.com/mgl.totem/2.mp4"]},
                 Spain:{
-                    percentaje:20, 
+                    percentaje:45, 
                     mapId:"Spain", 
                     refuges:30000, 
+                    variationMonth:100,
                     code:"ES", 
                     videos:["http://techslides.com/demos/sample-videos/small.mp4", "https://s3-eu-west-1.amazonaws.com/mgl.totem/VIDEO_20150912_173319_1408724567.mp4", "https://s3-eu-west-1.amazonaws.com/mgl.totem/1.mp4", "https://s3-eu-west-1.amazonaws.com/mgl.totem/2.mp4"]},
                 Germany:{
-                    percentaje:80, 
+                    percentaje:15, 
                     mapId:"Germany", 
                     refuges:20000, 
+                    variationMonth:10,
                     code:"DE", 
                     videos:["http://techslides.com/demos/sample-videos/small.mp4", "https://s3-eu-west-1.amazonaws.com/mgl.totem/VIDEO_20150912_173319_1408724567.mp4", "https://s3-eu-west-1.amazonaws.com/mgl.totem/1.mp4", "https://s3-eu-west-1.amazonaws.com/mgl.totem/2.mp4"]},
                 Hungary:{
                     percentaje:80, 
                     mapId:"Hungary", 
-                    refuges:20000, 
+                    refuges:30000, 
+                    variationMonth:50000,
                     code:"HU", 
                     videos:["http://techslides.com/demos/sample-videos/small.mp4", "https://s3-eu-west-1.amazonaws.com/mgl.totem/VIDEO_20150912_173319_1408724567.mp4", "https://s3-eu-west-1.amazonaws.com/mgl.totem/1.mp4", "https://s3-eu-west-1.amazonaws.com/mgl.totem/2.mp4"]},
                 Europe:{
-                    percentaje:80, 
+                    percentaje:69, 
+                    variationMonth:-10000,
                     mapId:"Europe", 
                     refuges:200090, 
                     videos:["http://techslides.com/demos/sample-videos/small.mp4", "https://s3-eu-west-1.amazonaws.com/mgl.totem/VIDEO_20150912_173319_1408724567.mp4", "https://s3-eu-west-1.amazonaws.com/mgl.totem/1.mp4", "https://s3-eu-west-1.amazonaws.com/mgl.totem/2.mp4"]},
@@ -292,11 +284,17 @@
                 console.log(key);
               if (countryData.hasOwnProperty(key)) {
                 React.render(
-                  <CountryStatus  code={countryData[key].code} percentaje={countryData[key].percentaje} mapId={countryData[key].mapId}  refuges={countryData[key].refuges}/>,
+                  <CountryStatus  code={countryData[key].code} percentaje={countryData[key].percentaje} mapId={countryData[key].mapId}  refuges={countryData[key].refuges} variationMonth={countryData[key].variationMonth}/>,
                   document.getElementById(countryData[key].mapId.toLowerCase())
                 );
               }
             }
+            React.render(
+              <CountryStatus  code={countryData["Europe"].code} percentaje={countryData["Europe"].percentaje} mapId={countryData["Europe"].mapId}  refuges={countryData["Europe"].refuges}/>,
+              document.getElementById("miniMapDiv")
+            );
+            $("#refuges").text(countryData["Europe"].refuges);
+            $("#variationMonth").text(countryData["Europe"].variationMonth);
 
             var renderVideos = function(country){
                 for(var i = 0; i < countryData[country].videos.length; i++){

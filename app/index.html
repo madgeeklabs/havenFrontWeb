@@ -21,62 +21,76 @@
         <div class="col-md-3">
         </div>
         <div class="col-md-6" align="center">
-            <h1>Let's make <span class="nameSelectedCountry" style="font-weight:600">Sweden</span> a Haven</h1>
+            <h1>Let's make <span class="nameSelectedCountry" style="font-weight:600">Europe</span> a Haven</h1>
         </div>
         <div class="col-md-3">
         </div>
     </div>
     <div class="row"  >
         <div class="col-md-3">
+            <a >
+                <img src="img/totem.png" alt="Totem Icon">
+            </a>
         </div>
-        <div class="col-md-6">
-            <div class="row" style="margin-bottom: 20px; padding-bottom:20px; border-bottom: 1px solid #ccc;">
-                <div class="col-md-6" >
-                    <a >
-                        <img src="img/totem.png" alt="Totem Icon">
-                    </a>
-                </div>
-                <div class="col-md-6" id="miniMapDiv" >
-                </div>
+        <div class="col-md-3">
+        </div>
+        <div class="col-md-3" >
+            <div id="miniMapDiv" >
             </div>
-        </div>
-        <div class="col-md-3" id="miniMapProgress" >
         </div>
     </div>
     <div class="row">
         <div class="col-md-9">
-            <h2>Last Videos in <span class="nameSelectedCountry">Sweden</span></h2>
+            <h2>Last Videos in <span class="nameSelectedCountry">Europe</span></h2>
             <div class="row videoRow">
                 <div class="col-md-4">
-                    <div id="video1" align="center" class="embed-responsive embed-responsive-16by9">
+                    <div id="video0" align="center" class="embed-responsive embed-responsive-16by9">
                     </div>
                 </div>
                 <div class="col-md-4">
-                    <div id="video2"  align="center" class="embed-responsive embed-responsive-16by9">
+                    <div id="video1"  align="center" class="embed-responsive embed-responsive-16by9">
                     </div>
                 </div>
                 <div class="col-md-4">
-                    <div id="video3" align="center" class="embed-responsive embed-responsive-16by9">
+                    <div id="video2" align="center" class="embed-responsive embed-responsive-16by9">
                     </div>
                 </div>
             </div>
             <div class="row videoRow">
                 <div class="col-md-4">
-                    <div id="video4" align="center" class="embed-responsive embed-responsive-16by9">
+                    <div id="video3" align="center" class="embed-responsive embed-responsive-16by9">
                     </div>
                 </div>
                 <div class="col-md-4">
-                    <div id="video5"  align="center" class="embed-responsive embed-responsive-16by9">
+                    <div id="video4"  align="center" class="embed-responsive embed-responsive-16by9">
                     </div>
                 </div>
+                <div class="col-md-4">
+                    <div id="video5" align="center" class="embed-responsive embed-responsive-16by9">
+                    </div>
+                </div>
+            </div>
+            <div class="row videoRow">
                 <div class="col-md-4">
                     <div id="video6" align="center" class="embed-responsive embed-responsive-16by9">
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div id="video7"  align="center" class="embed-responsive embed-responsive-16by9">
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div id="video8" align="center" class="embed-responsive embed-responsive-16by9">
                     </div>
                 </div>
             </div>
         </div>
         <div class="col-md-3">
-            <h2>Other Regions</h2>
+            <h2>Regions</h2>
+            <div class="row otherCountry">
+                <div id="sweden">
+                </div>
+            </div>
             <div class="row otherCountry">
                 <div id="spain">
                 </div>
@@ -87,6 +101,10 @@
             </div>
             <div class="row otherCountry">
                 <div id="germany">
+                </div>
+            </div>
+            <div class="row otherCountry">
+                <div id="europe">
                 </div>
             </div>
         </div>
@@ -119,7 +137,7 @@
                        .attr("d", path)
                        .attr("transform", "translate(0,300)")
                        .style("fill", "steelblue")
-                       .filter(function(e) { return e.id === countryCode;}).style("fill", "green");
+                       .filter(function(e) { if(typeof countryCode === "undefined"){return true}; return e.id === countryCode;}).style("fill", "green");
                 });
             };
         </script>
@@ -172,13 +190,16 @@
             });
             var CountryStatus = React.createClass({
                 handleClick: function(){
-                    console.log('hey');
+                    $(".nameSelectedCountry").text(this.props.mapId);
                     React.unmountComponentAtNode(document.getElementById('miniMapDiv'));
+                    for(var i = 0; i < 9; i++){
+                        React.unmountComponentAtNode(document.getElementById('video'+i));
+                    }
+                    renderVideos(this.props.mapId);
                     React.render(
                       <CountryStatus code={this.props.code} percentaje={this.props.percentaje} mapId={this.props.mapId}/>,
                       document.getElementById('miniMapDiv')
                     );
-                    console.log('ho');
                 },
               render: function() {
                 return (
@@ -217,47 +238,76 @@
             });
             /*
             React.render(
-              <CountryStatus code="SE" percentaje="30" mapId="alalala"/>,
-              document.getElementById('miniMapDiv')
+              <CountryStatus code="SE" percentaje="92" mapId="Sweden" refuges="1346"/>,
+              document.getElementById('sweden')
             );
-            */
             React.render(
-              <CountryStatus code="HU" percentaje="60" mapId="alala3"/>,
+              <CountryStatus code="ES" percentaje="24" mapId="Spain" refuges="24000"/>,
+              document.getElementById('spain')
+            );
+            React.render(
+              <CountryStatus code="HU" percentaje="60" mapId="Hungary" refuges="54000"/>,
               document.getElementById('hungary')
             );
             React.render(
-              <CountryStatus code="DE" percentaje="80" mapId="alala3GE"/>,
+              <CountryStatus code="DE" percentaje="80" mapId="Germany"  refuges="14000"/>,
               document.getElementById('germany')
             );
-            React.render(
-              <CountryStatus code="ES" percentaje="92" mapId="alalE"/>,
-              document.getElementById('spain')
-            );
+*/
 
-            React.render(
-              <Video  src="http://techslides.com/demos/sample-videos/small.mp4" />,
-              document.getElementById('video1')
-            );
-            React.render(
-              <Video src="http://techslides.com/demos/sample-videos/small.mp4" />,
-              document.getElementById('video2')
-            );
-            React.render(
-              <Video src="https://s3-eu-west-1.amazonaws.com/mgl.totem/VIDEO_20150912_173319_1408724567.mp4"/>,
-              document.getElementById('video3')
-            );
-            React.render(
-              <Video src="https://s3-eu-west-1.amazonaws.com/mgl.totem/VIDEO_20150912_173319_1408724567.mp4"/>,
-              document.getElementById('video4')
-            );
-            React.render(
-              <Video src="https://s3-eu-west-1.amazonaws.com/mgl.totem/1.mp4"/>,
-              document.getElementById('video5')
-            );
-            React.render(
-              <Video src="https://s3-eu-west-1.amazonaws.com/mgl.totem/2.mp4"/>,
-              document.getElementById('video6')
-            );
+
+            var countryData = {
+                Sweden:{
+                    percentaje:90, 
+                    mapId:"Sweden", 
+                    refuges:50000, 
+                    code:"SE", 
+                    videos:["http://techslides.com/demos/sample-videos/small.mp4", "https://s3-eu-west-1.amazonaws.com/mgl.totem/VIDEO_20150912_173319_1408724567.mp4", "https://s3-eu-west-1.amazonaws.com/mgl.totem/1.mp4", "https://s3-eu-west-1.amazonaws.com/mgl.totem/2.mp4"]},
+                Spain:{
+                    percentaje:20, 
+                    mapId:"Spain", 
+                    refuges:30000, 
+                    code:"ES", 
+                    videos:["http://techslides.com/demos/sample-videos/small.mp4", "https://s3-eu-west-1.amazonaws.com/mgl.totem/VIDEO_20150912_173319_1408724567.mp4", "https://s3-eu-west-1.amazonaws.com/mgl.totem/1.mp4", "https://s3-eu-west-1.amazonaws.com/mgl.totem/2.mp4"]},
+                Germany:{
+                    percentaje:80, 
+                    mapId:"Germany", 
+                    refuges:20000, 
+                    code:"DE", 
+                    videos:["http://techslides.com/demos/sample-videos/small.mp4", "https://s3-eu-west-1.amazonaws.com/mgl.totem/VIDEO_20150912_173319_1408724567.mp4", "https://s3-eu-west-1.amazonaws.com/mgl.totem/1.mp4", "https://s3-eu-west-1.amazonaws.com/mgl.totem/2.mp4"]},
+                Hungary:{
+                    percentaje:80, 
+                    mapId:"Hungary", 
+                    refuges:20000, 
+                    code:"HU", 
+                    videos:["http://techslides.com/demos/sample-videos/small.mp4", "https://s3-eu-west-1.amazonaws.com/mgl.totem/VIDEO_20150912_173319_1408724567.mp4", "https://s3-eu-west-1.amazonaws.com/mgl.totem/1.mp4", "https://s3-eu-west-1.amazonaws.com/mgl.totem/2.mp4"]},
+                Europe:{
+                    percentaje:80, 
+                    mapId:"Europe", 
+                    refuges:200090, 
+                    videos:["http://techslides.com/demos/sample-videos/small.mp4", "https://s3-eu-west-1.amazonaws.com/mgl.totem/VIDEO_20150912_173319_1408724567.mp4", "https://s3-eu-west-1.amazonaws.com/mgl.totem/1.mp4", "https://s3-eu-west-1.amazonaws.com/mgl.totem/2.mp4"]},
+            };
+
+            for (var key in countryData) {
+                console.log(key);
+              if (countryData.hasOwnProperty(key)) {
+                React.render(
+                  <CountryStatus  code={countryData[key].code} percentaje={countryData[key].percentaje} mapId={countryData[key].mapId}  refuges={countryData[key].refuges}/>,
+                  document.getElementById(countryData[key].mapId.toLowerCase())
+                );
+              }
+            }
+
+            var renderVideos = function(country){
+                for(var i = 0; i < countryData[country].videos.length; i++){
+                    React.render(
+                      <Video  src={countryData[country].videos[i]} />,
+                      document.getElementById('video' + i)
+                    );
+                }
+            };
+
+            renderVideos("Europe");
         </script>
 </body>
 </html>

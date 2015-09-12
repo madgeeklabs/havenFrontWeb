@@ -162,7 +162,7 @@
             var Minimap = React.createClass({
               render: function() {
                 return (
-                    <div id={this.props.mapId}>
+                    <div id={this.props.mapId} >
                     </div>
                 );
               },
@@ -171,11 +171,20 @@
                 }
             });
             var CountryStatus = React.createClass({
+                handleClick: function(){
+                    console.log('hey');
+                    React.unmountComponentAtNode(document.getElementById('miniMapDiv'));
+                    React.render(
+                      <CountryStatus code={this.props.code} percentaje={this.props.percentaje} mapId={this.props.mapId}/>,
+                      document.getElementById('miniMapDiv')
+                    );
+                    console.log('ho');
+                },
               render: function() {
                 return (
-                  <div className="countryStatus">
+                  <div className="countryStatus" onClick={this.handleClick}>
                     <Minimap code={this.props.code} mapId={this.props.mapId} /> 
-                    <ProgressBar percentaje={this.props.percentaje}/>
+                    <ProgressBar percentaje={this.props.percentaje} />
                   </div>
                 );
               }
@@ -206,10 +215,12 @@
 
                 }
             });
+            /*
             React.render(
               <CountryStatus code="SE" percentaje="30" mapId="alalala"/>,
               document.getElementById('miniMapDiv')
             );
+            */
             React.render(
               <CountryStatus code="HU" percentaje="60" mapId="alala3"/>,
               document.getElementById('hungary')

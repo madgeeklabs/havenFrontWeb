@@ -1,0 +1,144 @@
+<!doctype html>
+<html lang="en-US">
+<head>
+    <meta charset="UTF-8">
+    <title>Browsersync, Gulp + SASS Example</title>
+    <link rel='stylesheet' href='css/main.css'>
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
+    <script type="text/javascript" src="http://d3js.org/d3.v3.min.js"></script>
+
+</head>
+<body>
+<div class="container-fluid">
+    <div class="row" style="margin-bottom:30px">
+        <div class="col-md-3">
+        </div>
+        <div class="col-md-6" align="center">
+            <h1>Let's create a Haven</h1>
+        </div>
+        <div class="col-md-3">
+        </div>
+    </div>
+    <div class="row"  >
+        <div class="col-md-3">
+        </div>
+        <div class="col-md-6">
+            <div class="row" style="margin-bottom: 20px; padding-bottom:20px; border-bottom: 1px solid #ccc;">
+                <div class="col-md-6" >
+                    <a >
+                        <img src="img/totem.png" alt="Totem Icon">
+                    </a>
+                </div>
+                <div class="col-md-6" >
+                    <div id="miniMap">
+                    </div>
+                    <div class="progress">
+                        <div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100" style="width: 80%">
+                            <span class="sr-only">80% Complete (danger)</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-9">
+            <div class="row">
+                <div class="col-md-4">
+                    <div align="center" class="embed-responsive embed-responsive-16by9">
+                        <video controls class="embed-responsive-item">
+                            <source src=http://techslides.com/demos/sample-videos/small.mp4 type=video/mp4>
+                        </video>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div align="center" class="embed-responsive embed-responsive-16by9">
+                        <video  controls class="embed-responsive-item">
+                            <source src=http://techslides.com/demos/sample-videos/small.mp4 type=video/mp4>
+                        </video>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div align="center" class="embed-responsive embed-responsive-16by9">
+                        <video  controls class="embed-responsive-item">
+                            <source src=http://techslides.com/demos/sample-videos/small.mp4 type=video/mp4>
+                        </video>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-2">
+            <div class="row">
+                <div>
+                    <div id="miniMapES">
+                    </div>
+                    Spain Status
+                </div>
+                <div class="progress">
+                    <div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100" style="width: 80%">
+                        <span class="sr-only">80% Complete (danger)</span>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div>
+                    Hungary Status
+                </div>
+                <div class="progress">
+                    <div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100" style="width: 80%">
+                        <span class="sr-only">80% Complete (danger)</span>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div>
+                    Sweden Status
+                </div>
+                <div class="progress">
+                    <div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100" style="width: 80%">
+                        <span class="sr-only">80% Complete (danger)</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+        <script type="text/javascript">
+            var paintCountry = function(elementId, countryCode){
+                //Width and height
+                var w = 300;
+                var h = 200;
+                //Define map projection
+                var projection = d3.geo.azimuthalEquidistant()
+                                       .translate([w/2, h/2])
+                                       .scale([350]);
+                //Define path generator
+                var path = d3.geo.path()
+                                 .projection(projection);
+                //Create SVG element
+                var svg = d3.select("#" + elementId)
+                            .append("svg")
+                            .attr("width", w)
+                            .attr("height", h);
+                //Load in GeoJSON data
+                d3.json("data/europe.json", function(json) {
+                    //Bind data and create one path per GeoJSON feature
+                    svg.selectAll("path")
+                       .data(json.features)
+                       .enter()
+                       .append("path")
+                       .attr("d", path)
+                       .attr("transform", "translate(0,300)")
+                       .style("fill", "steelblue")
+                       .filter(function(e) { console.log(e);  return e.id === countryCode;}).style("fill", "green");
+                });
+            };
+            paintCountry("miniMap", "SE");
+            paintCountry("miniMapES", "ES");
+        </script>
+</body>
+</html>

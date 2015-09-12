@@ -1,2 +1,15 @@
 body {
-  background: white; }
+  background: white; 
+}
+
+.videoRow {
+  margin-bottom: 10px;
+}
+
+
+.otherCountry {
+  margin-bottom: 5px;
+  border-style: solid;
+  border-width: 2px;
+  overflow: hidden;   
+}

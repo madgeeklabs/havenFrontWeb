@@ -10,6 +10,9 @@
     <!-- Optional theme -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
     <script type="text/javascript" src="http://d3js.org/d3.v3.min.js"></script>
+     <script src="https://cdnjs.cloudflare.com/ajax/libs/react/0.13.3/react.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/react/0.13.3/JSXTransformer.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 
 </head>
 <body>
@@ -18,7 +21,7 @@
         <div class="col-md-3">
         </div>
         <div class="col-md-6" align="center">
-            <h1>Let's create a Haven</h1>
+            <h1>Let's make <span class="nameSelectedCountry" style="font-weight:600">Sweden</span> a Haven</h1>
         </div>
         <div class="col-md-3">
         </div>
@@ -33,75 +36,57 @@
                         <img src="img/totem.png" alt="Totem Icon">
                     </a>
                 </div>
-                <div class="col-md-6" >
-                    <div id="miniMap">
-                    </div>
-                    <div class="progress">
-                        <div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100" style="width: 80%">
-                            <span class="sr-only">80% Complete (danger)</span>
-                        </div>
-                    </div>
+                <div class="col-md-6" id="miniMapDiv" >
                 </div>
             </div>
+        </div>
+        <div class="col-md-3" id="miniMapProgress" >
         </div>
     </div>
     <div class="row">
         <div class="col-md-9">
-            <div class="row">
+            <h2>Last Videos in <span class="nameSelectedCountry">Sweden</span></h2>
+            <div class="row videoRow">
                 <div class="col-md-4">
-                    <div align="center" class="embed-responsive embed-responsive-16by9">
-                        <video controls class="embed-responsive-item">
-                            <source src=http://techslides.com/demos/sample-videos/small.mp4 type=video/mp4>
-                        </video>
+                    <div id="video1" align="center" class="embed-responsive embed-responsive-16by9">
                     </div>
                 </div>
                 <div class="col-md-4">
-                    <div align="center" class="embed-responsive embed-responsive-16by9">
-                        <video  controls class="embed-responsive-item">
-                            <source src=http://techslides.com/demos/sample-videos/small.mp4 type=video/mp4>
-                        </video>
+                    <div id="video2"  align="center" class="embed-responsive embed-responsive-16by9">
                     </div>
                 </div>
                 <div class="col-md-4">
-                    <div align="center" class="embed-responsive embed-responsive-16by9">
-                        <video  controls class="embed-responsive-item">
-                            <source src=http://techslides.com/demos/sample-videos/small.mp4 type=video/mp4>
-                        </video>
+                    <div id="video3" align="center" class="embed-responsive embed-responsive-16by9">
+                    </div>
+                </div>
+            </div>
+            <div class="row videoRow">
+                <div class="col-md-4">
+                    <div id="video4" align="center" class="embed-responsive embed-responsive-16by9">
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div id="video5"  align="center" class="embed-responsive embed-responsive-16by9">
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div id="video6" align="center" class="embed-responsive embed-responsive-16by9">
                     </div>
                 </div>
             </div>
         </div>
-        <div class="col-md-2">
-            <div class="row">
-                <div>
-                    <div id="miniMapES">
-                    </div>
-                    Spain Status
-                </div>
-                <div class="progress">
-                    <div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100" style="width: 80%">
-                        <span class="sr-only">80% Complete (danger)</span>
-                    </div>
+        <div class="col-md-3">
+            <h2>Other Regions</h2>
+            <div class="row otherCountry">
+                <div id="spain">
                 </div>
             </div>
-            <div class="row">
-                <div>
-                    Hungary Status
-                </div>
-                <div class="progress">
-                    <div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100" style="width: 80%">
-                        <span class="sr-only">80% Complete (danger)</span>
-                    </div>
+            <div class="row otherCountry">
+                <div id="hungary">
                 </div>
             </div>
-            <div class="row">
-                <div>
-                    Sweden Status
-                </div>
-                <div class="progress">
-                    <div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100" style="width: 80%">
-                        <span class="sr-only">80% Complete (danger)</span>
-                    </div>
+            <div class="row otherCountry">
+                <div id="germany">
                 </div>
             </div>
         </div>
@@ -134,11 +119,117 @@
                        .attr("d", path)
                        .attr("transform", "translate(0,300)")
                        .style("fill", "steelblue")
-                       .filter(function(e) { console.log(e);  return e.id === countryCode;}).style("fill", "green");
+                       .filter(function(e) { return e.id === countryCode;}).style("fill", "green");
                 });
             };
-            paintCountry("miniMap", "SE");
+            function makeid()
+            {
+                var text = "";
+                var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+
+                for( var i=0; i < 5; i++ )
+                    text += possible.charAt(Math.floor(Math.random() * possible.length));
+
+                return text;
+            }
+
             paintCountry("miniMapES", "ES");
+        </script>
+        <script type="text/jsx">
+          // Your code here
+            var divStyle = {
+              width: '80%'
+            };
+            var ProgressBar = React.createClass({
+              render: function() {
+                return (
+                    <div className='progress'>
+                      <div className='progress-bar'
+                           role='progressbar'
+                           aria-valuenow='70'
+                           aria-valuemin='0'
+                           aria-valuemax='100'
+                           style={{width: this.props.percentaje + "%"}}>
+                        <span className='sr-only'>70% Complete</span>
+                      </div>
+                    </div>
+                );
+              },
+                componentDidMount : function(){
+                    console.log("painting minimap?");
+                }
+            });
+            var Minimap = React.createClass({
+              render: function() {
+                return (
+                    <div id={this.props.mapId}>
+                    </div>
+                );
+              },
+                componentDidMount : function(){
+                    paintCountry(this.props.mapId, this.props.code);
+                }
+            });
+            var CountryStatus = React.createClass({
+              render: function() {
+                return (
+                  <div className="countryStatus">
+                    <Minimap code={this.props.code} mapId={this.props.mapId} /> 
+                    <ProgressBar percentaje={this.props.percentaje}/>
+                  </div>
+                );
+              }
+            });
+            var Video = React.createClass({
+              render: function() {
+                return (
+                    <video controls class="embed-responsive-item" style={{"background-color": "black !important", "min-width": "100%"}}>
+                        <source  src={this.props.src} type="video/mp4" />
+                    </video>
+                );
+              }
+            });
+            React.render(
+              <CountryStatus code="SE" percentaje="30" mapId="alalala"/>,
+              document.getElementById('miniMapDiv')
+            );
+            React.render(
+              <CountryStatus code="HU" percentaje="30" mapId="alala3"/>,
+              document.getElementById('hungary')
+            );
+            React.render(
+              <CountryStatus code="DE" percentaje="30" mapId="alala3GE"/>,
+              document.getElementById('germany')
+            );
+            React.render(
+              <CountryStatus code="ES" percentaje="30" mapId="alalE"/>,
+              document.getElementById('spain')
+            );
+
+            React.render(
+              <Video  src="http://techslides.com/demos/sample-videos/small.mp4" />,
+              document.getElementById('video1')
+            );
+            React.render(
+              <Video src="http://techslides.com/demos/sample-videos/small.mp4" />,
+              document.getElementById('video2')
+            );
+            React.render(
+              <Video src="https://s3-eu-west-1.amazonaws.com/mgl.totem/VIDEO_20150912_173319_1408724567.mp4"/>,
+              document.getElementById('video3')
+            );
+            React.render(
+              <Video src="https://s3-eu-west-1.amazonaws.com/mgl.totem/VIDEO_20150912_173319_1408724567.mp4"/>,
+              document.getElementById('video4')
+            );
+            React.render(
+              <Video src="https://s3-eu-west-1.amazonaws.com/mgl.totem/VIDEO_20150912_173319_1408724567.mp4"/>,
+              document.getElementById('video5')
+            );
+            React.render(
+              <Video src="https://s3-eu-west-1.amazonaws.com/mgl.totem/VIDEO_20150912_173319_1408724567.mp4"/>,
+              document.getElementById('video6')
+            );
         </script>
 </body>
 </html>

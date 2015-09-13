@@ -371,6 +371,8 @@
 
                 }
             });
+    
+
 
             var countryData = {
                 Sweden:{
@@ -399,8 +401,9 @@
                     variationMonth:25000,
                     mapId:"Europe", 
                     refuges:640000, 
-                    videos:["http://techslides.com/demos/sample-videos/small.mp4", "https://s3-eu-west-1.amazonaws.com/mgl.totem/VIDEO_20150912_173319_1408724567.mp4", "https://s3-eu-west-1.amazonaws.com/mgl.totem/1.mp4", "https://s3-eu-west-1.amazonaws.com/mgl.totem/2.mp4"]},
+                    videos:[]},
             };
+
 
             for (var key in countryData) {
                 console.log(key);
@@ -427,7 +430,24 @@
                 }
             };
 
-            renderVideos("Europe");
+            $.get( "http://haven.ngrok.io/api/videos", function( data ) {
+                for(var i = 0; i < data.length; i++){
+                    countryData["Europe"].videos.push("https://s3-eu-west-1.amazonaws.com/mgl.totem/" + data[i].video);
+                } 
+                for (var key in countryData) {
+                  if (countryData.hasOwnProperty(key)) {
+                    if(key !== "Europe"){
+                       for(var j = 0; j < countryData[key].videos.length; j++){
+                            countryData["Europe"].videos.push(countryData[key].videos[j]);
+                        } 
+                    }
+                  }
+                }
+                for(var i = 0; i < data.length; i++){
+                    countryData["Sweden"].videos.unshift("https://s3-eu-west-1.amazonaws.com/mgl.totem/" + data[i].video);
+                } 
+                renderVideos("Europe");
+            });
         </script>
 
 </body>

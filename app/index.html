@@ -57,7 +57,7 @@
                         <a href="about.html">About</a>
                     </li>
                     <li>
-                        <a href="blog.html">Open Data</a>
+                        <a href="opendata.html">Open Data</a>
                     </li>
                     <li>
                         <a href="contact.html">Contact</a>
@@ -92,7 +92,7 @@
                     <div class="col-lg-12 text-center">
                         <form id="checkout" method="post" action="http://haven.ngrok.io/payments/payment-methods">
                           <div id="payment-form"></div>
-                          <input class="btn-primary" type="submit" value="Donate $10">
+                          <input class="btn-primary" type="submit" value="Donate $10 to Europe" id="submitButton"></input>
                         </form>
 
                         <script src="js/braintree.js"></script>
@@ -339,6 +339,7 @@
                     $(".nameSelectedCountry").text(this.props.mapId);
                     $("#refuges").text(this.props.refuges);
                     $("#variationMonth").text(this.props.variationMonth);
+                    $("#submitButton").val("Donate $10 to " + this.props.mapId);
                     React.unmountComponentAtNode(document.getElementById('miniMapDiv'));
                     for(var i = 0; i < 9; i++){
                         React.unmountComponentAtNode(document.getElementById('video'+i));
@@ -394,21 +395,21 @@
                     refuges:48000, 
                     variationMonth:1000,
                     code:"SE", 
-                    videos:["http://techslides.com/demos/sample-videos/small.mp4", "https://s3-eu-west-1.amazonaws.com/mgl.totem/VIDEO_20150912_173319_1408724567.mp4", "https://s3-eu-west-1.amazonaws.com/mgl.totem/1.mp4", "https://s3-eu-west-1.amazonaws.com/mgl.totem/2.mp4"]},
+                    videos:["https://s3-eu-west-1.amazonaws.com/mgl.totem/3.mp4", "https://s3-eu-west-1.amazonaws.com/mgl.totem/VIDEO_20150912_173319_1408724567.mp4", "https://s3-eu-west-1.amazonaws.com/mgl.totem/1.mp4", "https://s3-eu-west-1.amazonaws.com/mgl.totem/2.mp4"]},
                 Spain:{
                     percentaje:45, 
                     mapId:"Spain", 
                     refuges:10000, 
                     variationMonth:-100,
                     code:"ES", 
-                    videos:["http://techslides.com/demos/sample-videos/small.mp4", "https://s3-eu-west-1.amazonaws.com/mgl.totem/VIDEO_20150912_173319_1408724567.mp4", "https://s3-eu-west-1.amazonaws.com/mgl.totem/1.mp4", "https://s3-eu-west-1.amazonaws.com/mgl.totem/2.mp4"]},
+                    videos:["https://s3-eu-west-1.amazonaws.com/mgl.totem/3.mp4", "https://s3-eu-west-1.amazonaws.com/mgl.totem/VIDEO_20150912_173319_1408724567.mp4", "https://s3-eu-west-1.amazonaws.com/mgl.totem/2.mp4", "https://s3-eu-west-1.amazonaws.com/mgl.totem/1.mp4"]},
                 Germany:{
                     percentaje:15, 
                     mapId:"Germany", 
                     refuges:200100, 
                     variationMonth:10000,
                     code:"DE", 
-                    videos:["http://techslides.com/demos/sample-videos/small.mp4", "https://s3-eu-west-1.amazonaws.com/mgl.totem/VIDEO_20150912_173319_1408724567.mp4", "https://s3-eu-west-1.amazonaws.com/mgl.totem/1.mp4", "https://s3-eu-west-1.amazonaws.com/mgl.totem/2.mp4"]},
+                    videos:["https://s3-eu-west-1.amazonaws.com/mgl.totem/VIDEO_20150912_173319_1408724567.mp4", "https://s3-eu-west-1.amazonaws.com/mgl.totem/1.mp4", "https://s3-eu-west-1.amazonaws.com/mgl.totem/2.mp4"]},
                 Europe:{
                     percentaje:69, 
                     variationMonth:25000,

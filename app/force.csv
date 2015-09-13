@@ -1,0 +1,15 @@
+source,target,value
+Germany,Spain,1.2
+UK,Germany,1.6
+France,Germany,0.6
+Germany,Carol,0.7
+Sweden,France,1.1
+Norway,France,0.3
+France,Sweden,1.5
+Germany,UK,1.1
+Finland,UK,1.6
+Eveie,Germany,2.0
+Finland,Denmark,0.4
+UK,Denmark,0.6
+France,Norway,0.5
+UK,Finland,0.7

@@ -71,134 +71,16 @@
 
     <div class="container">
 
-        <div class="row">
-            <div class="col-md-9">
-                <div class="box">
-                    <div class="col-lg-12 text-center">
-                        <h1>Let's make <span class="nameSelectedCountry" style="font-weight:2400">Europe</span> a Safe Haven</h1>
-                        <div class="col-md-6">
-                            <h2>Population in need</h2>
-                            <h1><span id="refuges"></span></h1>
-                            <h3>Last month variation</h3>
-                            <h2><span id="variationMonth"></span></h2>
-                        </div>
-                        <div class="col-md-6" >
-                            <div id="miniMapDiv" >
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="box">
-                    <div class="col-lg-12 text-center">
-                        <form id="checkout" method="post" action="http://192.168.1.45:8080/payments/payment-methods">
-                          <div id="payment-form"></div>
-                          <input class="btn-primary" type="submit" value="Donate $10">
-                        </form>
-
-                        <script src="https://js.braintreegateway.com/v2/braintree.js"></script>
-                        <script>
-                        // We generated a client token for you so you can test out this code
-                        // immediately. In a production-ready integration, you will need to
-                        // generate a client token on your server (see section below).
-                         $.get("http://192.168.1.45:8080/payments/client_token", function(data, status){
-                                var clientToken = data;
-                                braintree.setup(clientToken, "dropin", {
-                                  container: "payment-form"
-                                });
-                            });
-
-                        </script>
-                    </div>
-                </div>
-                <div class="box">
-                    <div class="col-lg-12 text-center">
-                        <h2>Last Videos in <span class="nameSelectedCountry">Europe</span></h2>
-                        <div class="row videoRow">
-                            <div class="col-md-4">
-                                <div id="video0" align="center" class="embed-responsive embed-responsive-16by9">
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div id="video1"  align="center" class="embed-responsive embed-responsive-16by9">
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div id="video2" align="center" class="embed-responsive embed-responsive-16by9">
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row videoRow">
-                            <div class="col-md-4">
-                                <div id="video3" align="center" class="embed-responsive embed-responsive-16by9">
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div id="video4"  align="center" class="embed-responsive embed-responsive-16by9">
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div id="video5" align="center" class="embed-responsive embed-responsive-16by9">
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row videoRow">
-                            <div class="col-md-4">
-                                <div id="video6" align="center" class="embed-responsive embed-responsive-16by9">
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div id="video7"  align="center" class="embed-responsive embed-responsive-16by9">
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div id="video8" align="center" class="embed-responsive embed-responsive-16by9">
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-3">
-                <div class="box">
-                    <div class="col-lg-12 text-center">
-                        <h2>Regions</h2>
-                        <div class="row otherCountry">
-                            <div id="sweden">
-                            </div>
-                        </div>
-                        <div class="row otherCountry">
-                            <div id="spain">
-                            </div>
-                        </div>
-                        <div class="row otherCountry">
-                            <div id="hungary">
-                            </div>
-                        </div>
-                        <div class="row otherCountry">
-                            <div id="germany">
-                            </div>
-                        </div>
-                        <div class="row otherCountry">
-                            <div id="europe">
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
 
         <div class="row">
             <div class="box">
                 <div class="col-lg-12">
                     <hr>
-                    <h2 class="intro-text text-center">Their story
-                        <strong>is worth knowing</strong>
-                    </h2>
+                    <h2 class="intro-text text-center">Thank you!</h2>
                     <hr>
-                    <img class="img-responsive img-border img-left" src="img/intro-pic.jpg" alt="">
+                    <img class="img-responsive img-border" src="img/thanks-pic.jpg" alt="">
                     <hr class="visible-xs">
                     <p>
-                    The refugee crisis began in 2011, when thousands of Syrian citizens fled across the border to Lebanon and Turkey. By early July 2011, 15,000 Syrian citizens had taken shelter in tent cities, set up in the Yayladağı, Reyhanlı and Altınözü districts of Hatay Province, near Turkey's border with Syria. By the end of that month, 5,000 of the refugees had returned to Syria.[51] However, by late June 2011, the number of Syrian refugees in Lebanon had reached around 10,000 people. By mid-July 2011, the first Syrian refugees found sanctuary in Jordan, with their numbers reaching 1,500 by December.[52][53]
 </p>
                 </div>
             </div>

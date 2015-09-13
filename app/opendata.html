@@ -165,6 +165,7 @@ text {
                     .attr("height", "100%")
                     .attr("fill", "white");
                 //Load in GeoJSON data
+                var colors = ["blue", "red", "orange", "cyan", "green","yellow"];
                 d3.json("data/europe.json", function(json) {
                     //Bind data and create one path per GeoJSON feature
                     svg.selectAll("path")
@@ -173,7 +174,7 @@ text {
                        .append("path")
                        .attr("d", path)
                        .attr("transform", "translate(0,300)")
-                       .style("fill", "steelblue");
+                       .style("fill", function(){return colors[Math.floor(Math.random() * (6))]});
                 });
 
             };

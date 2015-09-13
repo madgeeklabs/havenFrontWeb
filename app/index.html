@@ -22,10 +22,10 @@
     <link href="http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" rel="stylesheet" type="text/css">
     <link href="http://fonts.googleapis.com/css?family=Josefin+Slab:100,300,400,600,700,100italic,300italic,400italic,600italic,700italic" rel="stylesheet" type="text/css">
 
-    <script type="text/javascript" src="http://d3js.org/d3.v3.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/react/0.13.3/react.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/react/0.13.3/JSXTransformer.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script type="text/javascript" src="js/d3.v3.min.js"></script>
+    <script src="js/react.js"></script>
+    <script src="js/JSXTransformer.js"></script>
+    <script src="js/jquery.min.js"></script>
 </head>
 
 <body>
@@ -95,7 +95,7 @@
                           <input class="btn-primary" type="submit" value="Donate $10">
                         </form>
 
-                        <script src="https://js.braintreegateway.com/v2/braintree.js"></script>
+                        <script src="js/braintree.js"></script>
                         <script>
                         // We generated a client token for you so you can test out this code
                         // immediately. In a production-ready integration, you will need to
@@ -152,6 +152,20 @@
                             </div>
                             <div class="col-md-4">
                                 <div id="video8" align="center" class="embed-responsive embed-responsive-16by9">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row videoRow">
+                            <div class="col-md-4">
+                                <div id="video9" align="center" class="embed-responsive embed-responsive-16by9">
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div id="video10"  align="center" class="embed-responsive embed-responsive-16by9">
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div id="video11" align="center" class="embed-responsive embed-responsive-16by9">
                                 </div>
                             </div>
                         </div>
@@ -219,7 +233,6 @@
     </footer>
 
     <!-- jQuery -->
-    <script src="js/jquery.js"></script>
 
     <!-- Bootstrap Core JavaScript -->
     <script src="js/bootstrap.min.js"></script>
@@ -423,10 +436,12 @@
 
             var renderVideos = function(country){
                 for(var i = 0; i < countryData[country].videos.length; i++){
-                    React.render(
-                      <Video  src={countryData[country].videos[i]} />,
-                      document.getElementById('video' + i)
-                    );
+                    if(i<11){    
+                        React.render(
+                          <Video  src={countryData[country].videos[i]} />,
+                          document.getElementById('video' + i)
+                        );
+                    }
                 }
             };
 

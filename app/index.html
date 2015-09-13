@@ -90,7 +90,7 @@
                 </div>
                 <div class="box">
                     <div class="col-lg-12 text-center">
-                        <form id="checkout" method="post" action="http://192.168.1.45:8080/payments/payment-methods">
+                        <form id="checkout" method="post" action="http://haven.ngrok.io/payments/payment-methods">
                           <div id="payment-form"></div>
                           <input class="btn-primary" type="submit" value="Donate $10">
                         </form>
@@ -100,7 +100,7 @@
                         // We generated a client token for you so you can test out this code
                         // immediately. In a production-ready integration, you will need to
                         // generate a client token on your server (see section below).
-                         $.get("http://192.168.1.45:8080/payments/client_token", function(data, status){
+                         $.get("http://haven.ngrok.io/payments/client_token", function(data, status){
                                 var clientToken = data;
                                 braintree.setup(clientToken, "dropin", {
                                   container: "payment-form"
